@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import static com.github.florent37.singledateandtimepicker.widget.SingleDateAndTimeConstants.*;
+import static com.github.florent37.singledateandtimepicker.widget.SingleDateAndTimeConstants.DAYS_PADDING;
 
 public class WheelDayPicker extends WheelPicker<String> {
 
@@ -123,7 +123,8 @@ public class WheelDayPicker extends WheelPicker<String> {
             date = todayCalendar.getTime();
         } else {
             try {
-                date = getDateFormat().parse(itemText);
+                SimpleDateFormat simpleDateFormatWithYear = new SimpleDateFormat(getDateFormat().toPattern() + " yyyy", getCurrentLocale());
+                date = simpleDateFormatWithYear.parse(itemText + " " + Calendar.getInstance ().get(Calendar.YEAR));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
